@@ -1,0 +1,109 @@
+{% extends "instructor_sidebar.html" %}
+
+{% block link %}
+
+<link rel="stylesheet" href="/static/css/panel.css">
+
+{% endblock %}
+
+{% block content %}
+
+<h2>Academics - {{ course.title }}</h2>
+
+<!-- Tabs -->
+<div class="tabs">
+    <a href="?type=lesson" class="{% if tab == 'lesson' %}active{% endif %}">Lessons</a>
+    <a href="?type=exam" class="{% if tab == 'exam' %}active{% endif %}">Exams</a>
+    <a href="?type=assignment" class="{% if tab == 'assignment' %}active{% endif %}">Assignments</a>
+    <a href="?type=material" class="{% if tab == 'material' %}active{% endif %}">Study Materials</a>
+</div>
+
+<!-- CONTENT -->
+
+{% if tab == 'lesson' %}
+
+<h3>Lessons</h3>
+
+<a class="add-btn" href="{% url 'add_lesson' course.id %}">+ Add Lesson</a>
+
+<table>
+<tr>
+    <th>Title</th>
+    <th>Video</th>
+</tr>
+
+{% for l in lessons %}
+<tr>
+    <td>{{ l.title }}</td>
+    <td><a href="{{ l.video.url }}">View</a></td>
+</tr>
+{% empty %}
+<tr><td colspan="2">No lessons added</td></tr>
+{% endfor %}
+</table>
+
+{% elif tab == 'exam' %}
+
+<h3>Exams</h3>
+
+<a class="add-btn" href="#">+ Add Exam</a>
+
+<table>
+<tr>
+    <th>Title</th>
+</tr>
+
+{% for e in exams %}
+<tr>
+    <td>{{ e.title }}</td>
+</tr>
+{% empty %}
+<tr><td>No exams added</td></tr>
+{% endfor %}
+</table>
+
+{% elif tab == 'assignment' %}
+
+<h3>Assignments</h3>
+
+<a class="add-btn" href="#">+ Add Assignment</a>
+
+<table>
+<tr>
+    <th>Title</th>
+</tr>
+
+{% for a in assignments %}
+<tr>
+    <td>{{ a.title }}</td>
+</tr>
+{% empty %}
+<tr><td>No assignments added</td></tr>
+{% endfor %}
+</table>
+
+{% elif tab == 'material' %}
+
+<h3>Study Materials</h3>
+
+<a class="add-btn" href="#">+ Add Material</a>
+
+<table>
+<tr>
+    <th>Title</th>
+</tr>
+
+{% for m in materials %}
+<tr>
+    <td>{{ m.title }}</td>
+</tr>
+{% empty %}
+<tr><td>No materials added</td></tr>
+{% endfor %}
+</table>
+
+{% endif %}
+
+
+
+{% endblock %}

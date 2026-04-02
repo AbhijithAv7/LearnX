@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block link %}
+<link rel="stylesheet" href="/static/css/style.css">
+{% endblock %}
+
+{% block code %}
+
+<div class="add_course container">
+
+    <h2>Create Batch</h2>
+
+    <form method="POST">
+        {% csrf_token %}
+
+        <select class="form-control" name="course" required>
+            <option value="">Select Course</option>
+            {% for course in courses %}
+                <option value="{{ course.id }}">{{ course.title }}</option>
+            {% endfor %}
+        </select>
+
+        <input class="form-control" type="text" name="batch_name" placeholder="Enter Batch Name (e.g., Batch A)" required>
+
+        <button class="btn btn-dark w-100" type="submit">Create Batch</button>
+
+    </form>
+
+    <a href="{% url 'Course_Management' %}" class="back-btn">⬅ Back</a>
+
+</div>
+
+{% endblock %}

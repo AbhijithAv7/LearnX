@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block link %}{% endblock  %}
+
+{% block code %}
+
+<div class="role-container">
+
+    <h2>Select Your Role</h2>
+
+    <a href="{% url 'register' 'staff' %}">Staff</a>
+    <a href="{% url 'register' 'instructor' %}">Instructor</a>
+    <a href="{% url 'register' 'student' %}">Student</a>
+
+</div>
+
+{% endblock %}

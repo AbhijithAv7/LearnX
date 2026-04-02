@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assignment</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f6f9;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: 50px auto;
+            background: #ffffff;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+
+        p {
+            color: #555;
+            line-height: 1.6;
+        }
+
+        .material-link {
+            display: inline-block;
+            margin-top: 10px;
+            text-decoration: none;
+            color: #007bff;
+            font-weight: 500;
+        }
+
+        .material-link:hover {
+            color: #0056b3;
+        }
+
+        hr {
+            border: none;
+            height: 1px;
+            background: #ddd;
+            margin: 20px 0;
+        }
+
+        h3 {
+            margin-bottom: 10px;
+            color: #444;
+        }
+
+        form {
+            margin-top: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        input[type="url"] {
+            width: 100%;
+            padding: 10px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+
+        input[type="url"]:focus {
+            outline: none;
+            border-color: #007bff;
+        }
+
+        button {
+            padding: 10px 16px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background-color: #218838;
+        }
+
+        .submission-box {
+            margin-top: 20px;
+            padding: 15px;
+            background: #f9fafb;
+            border-radius: 8px;
+        }
+
+        .submission-box p {
+            margin: 6px 0;
+        }
+
+        .back-btn {
+            display: inline-block;
+            margin-top: 25px;
+            padding: 10px 16px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            transition: 0.3s;
+        }
+
+        .back-btn:hover {
+            background-color: #0056b3;
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <h2>{{ assignment.title }}</h2>
+
+    <p>{{ assignment.description }}</p>
+
+    {% if assignment.material_link %}
+        <a class="material-link" href="{{ assignment.material_link }}" target="_blank">
+            📂 View Material
+        </a>
+    {% endif %}
+
+    <hr>
+
+    <h3>Your Submission</h3>
+
+    <form method="POST">
+        {% csrf_token %}
+        <input type="url" name="submission_link" placeholder="Paste your Google Drive link" required>
+        <button type="submit">Submit</button>
+    </form>
+
+    {% if submission %}
+        <div class="submission-box">
+            <p><b>Your Link:</b> 
+                <a href="{{ submission.submission_link }}" target="_blank">
+                    {{ submission.submission_link }}
+                </a>
+            </p>
+
+            <p><b>Score:</b> {{ submission.score|default:"Not graded" }}</p>
+            <p><b>Feedback:</b> {{ submission.feedback|default:"No feedback yet" }}</p>
+        </div>
+    {% endif %}
+
+    
+    <a href="javascript:history.back()" class="back-btn">⬅ Back</a>
+
+</div>
+
+</body>
+</html>

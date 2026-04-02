@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="/static/css/dashboard.css">
+</head>
+<body>
+
+<div class="admin-dashboard">
+
+    <div class="sidebar">
+        <h2>Admin Panel</h2>
+        <ul>
+            <li><a href="{% url "admin_dashboard" %}">📝 Dashboard</a></li>
+            <li><a href="{% url "Course_Management" %}">📚 Course Management</a></li>
+        </ul>
+    </div>
+
+    <div class="main-content">
+
+        <div class="dashboard-header">
+            <h1>Welcome, Admin 👋</h1>
+            <a href="{% url "home" %}" class="logout-btn">Logout</a>
+        </div>
+
+<div class="stats-cards" id="monitoring">
+
+
+    <div class="card">
+        <h3>Total Students</h3>
+        <p>{{ total_students }}</p>
+
+        <div class="card-buttons">
+            <a href="{% url "view_students" %}" class="btn view-btn">View</a>
+        </div>
+    </div>
+
+
+    <div class="card">
+        <h3>Total Staff</h3>
+        <p>{{ total_staff }}</p>
+
+        <div class="card-buttons">
+            <a href="{% url "view_staff" %}" class="btn view-btn">View</a>
+        </div>
+    </div>
+
+    <div class="card">
+        <h3>Total Instructor</h3>
+        <p>{{ total_instructors }}</p>
+
+        <div class="card-buttons">
+            <a href="{% url "view_instructors" %}" class="btn view-btn">View</a>
+        </div>
+    </div>
+
+    
+    <div class="card">
+        <h3>Total Courses</h3>
+        <p>{{ total_courses }}</p>
+
+        <div class="card-buttons">
+            <a href="{% url 'view_courses' %}" class="btn view-btn">View</a>
+        </div>
+    </div>
+
+    <div class="card">
+        <h3>Allocated Instructors</h3>
+        <p>{{ total_instructor_allocations }}</p>
+        <div class="card-buttons">
+            <a href="{% url 'view_allocated_instructor' %}" class="btn view-btn">View</a>
+        </div>
+    </div>
+
+    
+    <div class="card">
+        <h3>Allocated Staff</h3>
+        <p>{{ total_staff_allocations }}</p>
+        <div class="card-buttons">
+            <a href="{% url 'view_allocated_staff' %}" class="btn view-btn">View</a>
+        </div>
+    </div>
+
+
+    <div class="card">
+        <h3>Total Exams</h3>
+        <p>{{ total_exams }}</p>
+
+    <div class="card-buttons">
+        <a href="{% url "admin_view_exams" %}" class="btn view-btn">View</a>
+    </div>
+    </div>
+
+    <div class="card">
+        <h3>Total Assignments</h3>
+        <p>{{ total_assignments }}</p>
+
+    <div class="card-buttons">
+        <a href="{% url "admin_view_assignments" %}" class="btn view-btn">View</a>
+    </div>
+    </div>
+
+    <div class="card">
+        <h3>Total Materials</h3>
+        <p>{{ total_materials }}</p>
+
+    <div class="card-buttons">
+        <a href="{% url "admin_view_materials" %}" class="btn view-btn">View</a>
+    </div>
+    </div>
+
+{% comment %} <div class="card">
+    <h3>Total Revenue</h3>
+    <p>₹ {{ total_revenue }}</p>
+
+    <div class="card-buttons">
+        <a href="#" class="btn view-btn">View</a>
+    </div>
+</div> {% endcomment %}
+
+</div>
+
+
+        {% comment %} <section id="academic">
+            <h2>📝 Academic Control</h2>
+            <a href="#" class="action-btn">View Assignments</a>
+            <a href="#" class="action-btn">View Submissions</a>
+            <a href="#" class="action-btn">View Results</a>
+        </section>
+
+        <section id="system">
+            <h2>⚙️ System Control</h2>
+            <a href="#" class="action-btn">Activate / Deactivate Users</a>
+            <a href="#" class="action-btn">Reset Passwords</a>
+        </section>  {% endcomment %}
+
+    </div>
+
+</div>
+
+</body>
+</html> 

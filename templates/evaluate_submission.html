@@ -1,0 +1,133 @@
+{% extends "instructor_sidebar.html" %}
+
+{% block link %}
+
+<link rel="stylesheet" href="/static/css/panel.css">
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f6f9;
+    padding: 0;
+    margin: 0;
+}
+
+/* Page title */
+h2 {
+    text-align: center;
+    margin: 20px 0;
+    color: #333;
+}
+
+/* Container */
+.evaluation-container {
+    max-width: 600px;
+    margin: 0 auto;
+    background: #fff;
+    padding: 25px 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+/* Student info */
+.evaluation-container p {
+    font-size: 16px;
+    color: #222;
+    margin-bottom: 10px;
+}
+
+/* Links */
+.evaluation-container a {
+    display: inline-block;
+    margin-bottom: 20px;
+    color: #007bff;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.evaluation-container a:hover {
+    text-decoration: underline;
+}
+
+/* Form inputs */
+.evaluation-container input[type="number"],
+.evaluation-container textarea {
+    width: 100%;
+    padding: 10px 12px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+    resize: vertical;
+    box-sizing: border-box;
+}
+
+/* Submit button */
+.evaluation-container button {
+    display: block;
+    width: 100%;
+    padding: 12px 0;
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.evaluation-container button:hover {
+    background-color: #218838;
+}
+
+/* Back button */
+.back-btn {
+    display: block;
+    width: 100%;
+    text-align: center;
+    padding: 10px 0;
+    margin-top: 15px;
+    color: black;
+    text-decoration: none;
+    border-radius: 6px;
+    transition: 0.3s;
+}
+
+.back-btn:hover {
+    color: white;
+    background-color: #0673e7;
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 600px) {
+    .evaluation-container {
+        padding: 20px 15px;
+    }
+
+    h2 {
+        font-size: 20px;
+    }
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="evaluation-container">
+    <h2>Evaluate Submission</h2>
+
+    <p><b>Student:</b> {{ submission.student.username }}</p>
+
+    <a href="{{ submission.submission_link }}" target="_blank">Open Submission</a>
+
+    <form method="POST">
+        {% csrf_token %}
+
+        <input type="number" name="score" placeholder="Enter marks" min="0"><br>
+        <textarea name="feedback" placeholder="Feedback" rows="5"></textarea><br>
+
+        <button type="submit">Submit Evaluation</button>
+    </form>
+
+    <a href="javascript:history.back()" class="back-btn">⬅ Back</a>
+</div>
+{% endblock %}

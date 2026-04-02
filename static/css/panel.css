@@ -1,0 +1,425 @@
+
+body {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+
+.dashboard {
+    display: flex;
+    flex: 1;
+}
+
+
+.sidebar1 {
+    width: 80px;
+    padding-top: 20px;
+}
+
+
+.sidebar1 a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #555;
+    text-decoration: none;
+    margin: 15px 0;
+    font-size: 12px;
+}
+
+
+.sidebar1 span {
+    font-size: 24px;
+    margin-bottom: 5px;
+}
+
+
+.sidebar1 a:hover {
+    color: #2f66d0;
+}
+
+
+.main-content {
+    flex: 1;
+    padding: 20px;
+}
+
+/* //////////////////////////////// STUDENT dashboard ///////////////////////////// */
+.hero {
+    height: 80vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* TITLE */
+.hero h1 {
+    font-size: 50px;
+    color: #2f66d0;
+    margin-bottom: 15px;
+}
+
+
+.hero p {
+    font-size: 18px;
+    color: #555;
+    margin-bottom: 25px;
+}
+
+
+.btn {
+    text-decoration: none;
+    background: #2f66d0;
+    color: white;
+    padding: 12px 25px;
+    border-radius: 25px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.btn:hover {
+    background: black;
+}
+/* ///////////////////////////////profile///////////////////////  */
+.profile-container {
+    width: 400px;
+    margin: 40px auto;
+    text-align: center;
+    font-family: Arial, sans-serif;
+}
+
+
+.profile-container h2 {
+    margin-bottom: 20px;
+}
+
+
+.profile-pic-wrapper {
+    position: relative;
+    width: 130px;
+    height: 130px;
+    margin: 0 auto 20px;
+}
+
+.profile-pic {
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #ddd;
+}
+
+
+#profileImageInput {
+    display: none;
+}
+
+
+.camera-icon {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    background: black;
+    color: white;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+
+.profile-form input {
+    width: 100%;
+    padding: 14px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    font-size: 14px;
+}
+
+
+.profile-form button {
+    width: 100%;
+    padding: 14px;
+    background-color: black;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.profile-form button:hover {
+    background-color: #333;
+}
+/* ///////////////////////////////enroll list//////////////////////  */
+
+
+/* Title */
+h2 {
+    padding: 20px;
+    color: black;
+}
+
+/* Tabs */
+.tabs {
+    display: flex;
+    margin: 0 20px;
+}
+
+.tabs a {
+    padding: 12px 25px;
+    text-decoration: none;
+    color:black;
+    font-weight: bold;
+}
+
+
+.tabs a.active {
+    color: black;
+    border-bottom: 3px solid orange;
+}
+table {
+    width: 95%;
+    margin: 20px;
+    border-collapse: collapse;
+    background: #1a1a1a;
+}
+
+th {
+    background: white;
+    color:black;
+    padding: 10px;
+}
+
+td {
+    padding: 10px;
+    color: black;
+    background-color: white;
+}
+
+/* Buttons */
+.approve {
+    color: lime;
+    margin-right: 10px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.reject {
+    color: red;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* ///////////////////////////// instructor course //////////////////// */
+.tabs {
+    display: flex;
+    margin-bottom: 15px;
+}
+
+.tabs a {
+    padding: 10px 20px;
+    text-decoration: none;
+    color: black;
+}
+
+.tabs a.active {
+    border-bottom: 3px solid black;
+}
+
+.course-list a {
+    display: inline-block;
+    margin: 5px;
+    padding: 6px 12px;
+    border: 1px solid black;
+    background: white;
+    color: black;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.course-list a.active {
+    color: black;
+}
+
+.add-btn {
+    display: inline-block;
+    margin: 10px 0;
+    padding: 6px 12px;
+    border: 1px solid black;
+    color: black;
+    text-decoration: none;
+    border-radius: 5px;
+}
+/* ////////////////////////////add////////////////////////////  */
+.add_course {
+    max-width: 600px;
+    margin: 80px auto;
+    padding: 30px;
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.add_course h2 {
+    text-align: center;
+    margin-bottom: 25px;
+    font-weight: 600;
+}
+
+.add_course input,
+.add_course textarea {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 18px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 15px;
+}
+
+.add_course input:focus,
+.add_course textarea:focus {
+    border-color: #000;
+    outline: none;
+}
+
+.add_course textarea {
+    height: 120px;
+    resize: none;
+}
+
+.add_course button {
+    width: 100%;
+    padding: 12px;
+    background: black;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.add_course button:hover {
+    background: #333;
+}
+
+@media (max-width: 900px) {
+
+
+    /* Hero */
+    .hero {
+        height: auto;
+        padding: 40px 20px;
+    }
+
+    .hero h1 {
+        font-size: 34px;
+        text-align: center;
+    }
+
+    .hero p {
+        font-size: 16px;
+        text-align: center;
+    }
+
+    /* Profile */
+    .profile-container {
+        width: 100px;
+    }
+
+    /* Add course */
+    .add_course {
+        width: 90%;
+        margin: 40px auto;
+    }
+
+    /* Table scroll */
+    table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+        width: 100%;
+    }
+
+    /* Tabs scroll */
+    .tabs {
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+}
+
+
+/* ====== Mobile (<= 600px) ====== */
+@media (max-width: 600px) {
+
+    /* Smaller text */
+    .hero h1 {
+        font-size: 26px;
+    }
+
+    .hero p {
+        font-size: 14px;
+    }
+
+    .btn {
+        padding: 10px 18px;
+        font-size: 14px;
+    }
+
+    /* Sidebar compact */
+    .sidebar1 span {
+        font-size: 18px;
+    }
+
+    .sidebar1 a {
+        font-size: 10px;
+    }
+
+    /* Profile */
+    .profile-container {
+        width: 95%;
+    }
+
+    .profile-pic {
+        width: 100px;
+        height: 100px;
+    }
+
+    .profile-pic-wrapper {
+        width: 100px;
+        height: 100px;
+    }
+
+    .camera-icon {
+        width: 28px;
+        height: 28px;
+        font-size: 12px;
+    }
+
+    .profile-form input,
+    .profile-form button {
+        padding: 10px;
+        font-size: 13px;
+    }
+
+    
+    .add_course {
+        padding: 20px;
+    }
+
+    .tabs {
+        width: fit-content;  
+        max-width: 100%;
+        overflow-x: auto;    
+    }
+
+}

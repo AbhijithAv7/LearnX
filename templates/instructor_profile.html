@@ -1,0 +1,40 @@
+{% extends "instructor_sidebar.html" %}
+
+
+{% block link %}
+
+<link rel="stylesheet" href="/static/css/panel.css">
+
+{% endblock %}
+
+{% block content %}
+
+<div class="profile-container">
+
+    <h2>My Profile</h2>
+
+    <form method="POST" enctype="multipart/form-data" class="profile-form">
+        {% csrf_token %}
+
+        
+        <div class="profile-pic-wrapper">
+            <label for="profileImageInput">
+                <img src="/Dashboard/{{ user.profile_image.url }}" class="profile-pic">
+                <div class="camera-icon">📷</div>
+            </label>
+            <input type="file" id="profileImageInput" name="profile_image">
+        </div>
+
+        
+        <input type="text" name="username" value="{{ user.username }}" placeholder="Name">
+        <input type="text" name="phone" value="{{ user.phone }}" placeholder="Mobile Number">
+        <input type="email" name="email" value="{{ user.email }}" placeholder="Email">
+
+       
+
+    </form>
+
+</div>
+
+
+{% endblock %}

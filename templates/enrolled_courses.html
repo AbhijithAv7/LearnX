@@ -1,0 +1,30 @@
+{% extends "student_sidebar.html" %}
+
+{% block content %}
+
+<h2>My Courses</h2>
+
+<div class="course-container">
+
+    {% for e in enrollments %}
+    <div class="course-card">
+
+        <h3>{{ e.course.title }}</h3>
+        <p>{{ e.course.description|truncatewords:15 }}</p>
+
+        <p><b>Batch:</b> {{ e.batch.name }}</p>
+
+        <div class="course-actions">
+            <a href="{% url 'course_detail' e.course.id %}">
+                <button class="view-btn">View Course</button>
+            </a>
+        </div>
+
+    </div>
+    {% empty %}
+        <p>You have no enrolled courses</p>
+    {% endfor %}
+
+</div>
+
+{% endblock %}

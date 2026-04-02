@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lessons</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f6f9;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: 50px auto;
+            background: #ffffff;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        h3 {
+            margin-top: 20px;
+            color: #555;
+        }
+
+        hr {
+            border: none;
+            height: 1px;
+            background: #ddd;
+            margin: 15px 0;
+        }
+
+        .lesson-item {
+            padding: 10px 12px;
+            margin-bottom: 8px;
+            background: #f9fafb;
+            border-radius: 6px;
+            transition: 0.3s;
+        }
+
+        .lesson-item:hover {
+            background: #eef2f7;
+            transform: translateX(5px);
+        }
+
+        .lesson-link {
+            text-decoration: none;
+            color: #007bff;
+            font-weight: 500;
+        }
+
+        .lesson-link:hover {
+            color: #0056b3;
+        }
+
+        .empty {
+            color: #888;
+            font-style: italic;
+            margin-top: 10px;
+        }
+
+        .back-btn {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 16px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            transition: 0.3s;
+        }
+
+        .back-btn:hover {
+            background-color: #0056b3;
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <h2>{{ course.title }} - Lessons</h2>
+
+    <hr>
+
+    <h3>All Lessons</h3>
+
+    {% for lesson in lessons %}
+        <div class="lesson-item">
+            <a class="lesson-link" href="{% url 'course_detail' course.id %}?lesson_id={{ lesson.id }}">
+                ▶ {{ lesson.title }}
+            </a>
+        </div>
+    {% empty %}
+        <p class="empty">No lessons available</p>
+    {% endfor %}
+
+    <a href="javascript:history.back()" class="back-btn">⬅ Back</a>
+
+</div>
+
+</body>
+</html>

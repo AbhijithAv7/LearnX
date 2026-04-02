@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block link %}
+
+{% endblock %}
+
+{% block code %}
+
+<div class="home-container">
+
+    <h1>Welcome to LearnX 🎓</h1>
+
+    <p><i>"Start learning today, shape your tomorrow."</i></p>
+
+    <div class="home-buttons">
+        <a href="{% url 'login' %}">Login</a>
+        <a href="{% url 'role_select' %}" class="register-btn">Register</a>
+    </div>
+
+</div>
+
+{% endblock %}

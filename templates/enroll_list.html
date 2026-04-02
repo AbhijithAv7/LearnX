@@ -1,0 +1,111 @@
+{% extends "staff_sidebar.html" %}
+
+{% block link %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link rel="stylesheet" href="/static/css/panel.css">
+{% endblock %}
+
+{% block content %}
+
+<style>
+.enrollment-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+/* Card */
+.enrollment-card {
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 15px;
+    background: #fff;
+    width: 280px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+}
+
+/* Title rows */
+.enrollment-row {
+    margin-bottom: 8px;
+}
+
+.label {
+    font-weight: 600;
+    color: #555;
+}
+
+.value {
+    color: #222;
+}
+
+/* Actions */
+.actions {
+    margin-top: 10px;
+}
+
+.approve {
+    color: green;
+    margin-right: 10px;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.reject {
+    color: red;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+/* 📱 Responsive */
+@media (max-width: 600px) {
+    .enrollment-container {
+        justify-content: center;
+    }
+
+    .enrollment-card {
+        width: 100%;
+    }
+}
+</style>
+
+<h2 style="margin-bottom:15px;">Enrollment Management</h2>
+
+<div class="enrollment-container">
+
+{% for e in enrollments %}
+<div class="enrollment-card">
+
+    <div class="enrollment-row">
+        <span class="label">User:</span>
+        <span class="value">{{ e.user.username }}</span>
+    </div>
+
+    <div class="enrollment-row">
+        <span class="label">Course:</span>
+        <span class="value">{{ e.course.title }}</span>
+    </div>
+
+    {% if tab == 'pending' %}
+    <div class="actions">
+        <a class="approve" href="{% url 'approve_enrollment' e.id %}">
+            <i class="fa fa-check"></i> Approve
+        </a>
+        <a class="reject" href="{% url 'reject_enrollment' e.id %}">
+            <i class="fa fa-times"></i> Reject
+        </a>
+    </div>
+    {% else %}
+    <div class="enrollment-row">
+        <span class="label">Date:</span>
+        <span class="value">{{ e.created_at }}</span>
+    </div>
+    {% endif %}
+
+</div>
+{% empty %}
+<p>No data found</p>
+{% endfor %}
+
+</div>
+
+{% endblock %}

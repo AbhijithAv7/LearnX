@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block code %}
+
+<div class="container">
+
+<h2>Allocated Staff</h2>
+
+<table class="table">
+    <tr>
+        <th>Staff</th>
+        <th>Course</th>
+        <th>Action</th>
+    </tr>
+
+    {% for a in allocations %}
+    <tr>
+        <td>{{ a.staff.username }}</td>
+        <td>{{ a.course.title }}</td>
+        
+        <td>
+            <a href="{% url 'update_staff_allocation' a.id %}">Edit</a> |
+            <a href="{% url 'delete_staff_allocation' a.id %}">Delete</a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+        <a href="{% url 'admin_dashboard' %}" class="back-btn">⬅ Back</a>
+
+</div>
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends "instructor_sidebar.html" %}
+
+{% block link %}
+
+<link rel="stylesheet" href="/static/css/panel.css">
+
+{% endblock %}
+
+{% block content %}
+
+<a href="{% url 'instructor_courses' %}?tab=academics&course_id={{ course.id }}" class="back-btn">
+    ⬅ Back
+</a>
+
+<div class="add_course container">
+
+    <h2>Add Lesson - {{ course.title }}</h2>
+
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <input class="form-control" type="text" name="title" placeholder="Lesson Title" required>
+
+        <input class="form-control" type="file" name="video" placeholder="Upload Video" required>
+
+        <button class="btn btn-dark w-100" type="submit">Add Lesson</button>
+    </form>
+</div>
+
+{% endblock %}

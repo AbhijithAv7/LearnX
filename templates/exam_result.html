@@ -1,0 +1,75 @@
+{% extends "instructor_sidebar.html" %}
+
+{% block link %}
+
+<link rel="stylesheet" href="/static/css/panel.css">
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f6f9;
+}
+
+h2 {
+    text-align: center;
+    color: #333;
+}
+
+.result-box {
+    background: #fff;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.08);
+    margin-bottom: 12px;
+}
+
+.back-btn {
+    display: inline-block;
+    margin: 20px auto;
+    padding: 8px 16px;
+    background: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+}
+
+.back-btn:hover {
+    background: #0056b3;
+}
+</style>
+{% endblock %}
+
+{% block content %}
+
+<a href="javascript:history.back()" class="back-btn">⬅ Back</a>
+
+<h2>{{ exam.title }} - Result</h2>
+
+<p><b>Score:</b> {{ score }} / {{ total }}</p>
+
+<hr>
+
+{% for a in answers %}
+    <div class="result-box">
+        <p><b>{{ forloop.counter }}. {{ a.question.question_text }}</b></p>
+
+        <p><b>Your Answer:</b> {{ a.selected }}</p>
+        <p><b>Correct Answer:</b> {{ a.correct }}</p>
+
+        {% if a.is_correct %}
+            <p style="color: green;">✔ Correct</p>
+        {% else %}
+            <p style="color: red;">✘ Wrong</p>
+        {% endif %}
+    </div>
+    <hr>
+{% empty %}
+    <p>No answers found.</p>
+{% endfor %}
+
+
+
+{% endblock %}
+
+
+

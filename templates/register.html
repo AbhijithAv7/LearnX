@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block code %}
+
+<div class="registration-container">
+
+    <h2>{{ role }} Registration</h2>
+
+    <form method="POST">
+        {% csrf_token %}
+
+        <input type="text" name="name" placeholder="Username" required>
+        <input type="email" name="email" placeholder="Email" required>
+        <input type="number" name="phonenumber" placeholder="Phone Number" required>
+        <input type="password" name="password" placeholder="Password" required>
+
+        <button type="submit">Register</button>
+    </form>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ course.title }}</title>
+    <link rel="stylesheet" href="/static/css/course.css">
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+    <a href="javascript:history.back()" class="back-btn">← Back</a>
+    <span class="nav-title">{{ course.title }}</span>
+</nav>
+
+<div class="container">
+
+    <!-- LEFT (VIDEO PLAYER) -->
+    <div class="left">
+
+        {% if is_allowed and selected_lesson %}
+            <video id="videoPlayer" controls playsinline>
+                <source src="/Academics/{{ selected_lesson.video.url }}">
+            </video>
+            <h4>{{ selected_lesson.title }}</h4>
+        {% else %}
+            <div class="locked">
+                🔒 Buy the course to unlock lessons
+            </div>
+        {% endif %}
+
+        <h2>{{ course.title }}</h2>
+        <p>{{ course.description }}</p>
+
+        {% if not purchase %}
+            <a href="{% url 'buy_course' course.id %}">
+                <button class="buy-btn">Buy — ₹{{ course.price }}</button>
+            </a>
+        {% endif %}
+
+    </div>
+
+    <!-- RIGHT SIDE -->
+    <div class="right">
+
+        <div class="top-row tabs">
+            <a href="{% url 'view_lessons' course.id %}" class="tab active">
+                📺 Lessons
+            </a>
+            <a href="{% url 'course_progress' course.id %}" class="tab active">
+                📊 Progress
+            </a>
+        </div>
+
+        <!-- EXAMS -->
+        <div class="section">
+            <h3>📝 Exams</h3>
+            {% if exams %}
+                {% for e in exams %}
+                    <p>{{ e.title }}</p>
+                    <a href="{% url 'attend_exam' e.id %}">
+                        <button class="action-btn">Start Exam</button>
+                    </a>
+                {% endfor %}
+            {% else %}
+                <p>No exams available yet.</p>
+                <button class="action-btn" disabled>Start Exam</button>
+            {% endif %}
+        </div>
+
+        <!-- ASSIGNMENTS -->
+        <div class="section">
+            <h3>📚 Assignments</h3>
+            {% if assignments %}
+                {% for a in assignments %}
+                    <p>{{ a.title }}</p>
+                    <a href="{% url 'assignment_detail' a.id %}">
+                        <button class="action-btn">View</button>
+                    </a>
+                {% endfor %}
+            {% else %}
+                <p>No assignments yet.</p>
+                <button class="action-btn" disabled>View</button>
+            {% endif %}
+        </div>
+
+        <!-- STUDY MATERIAL -->
+        <div class="section">
+            <h3>📄 Study Materials</h3>
+            <p>No materials yet.</p>
+            <a href="{% url 'view_materials' course.id %}">
+                <button class="action-btn">View Materials</button>
+            </a>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    // ── Mark attendance on video end ──
+    let currentLesson = "{{ selected_lesson.id }}";
+    const videoEl = document.getElementById("videoPlayer");
+
+    if (videoEl) {
+        videoEl.onended = function () {
+            fetch(`/Academics/mark-attendance/${currentLesson}/`);
+        };
+
+        // ── Fullscreen → force landscape (Android Chrome) ──
+        function handleFullscreen() {
+            const isFullscreen =
+                document.fullscreenElement ||
+                document.webkitFullscreenElement;
+
+            if (isFullscreen) {
+                if (screen.orientation && screen.orientation.lock) {
+                    screen.orientation.lock('landscape').catch(() => {});
+                }
+            } else {
+                if (screen.orientation && screen.orientation.unlock) {
+                    screen.orientation.unlock();
+                }
+            }
+        }
+
+        videoEl.addEventListener('fullscreenchange', handleFullscreen);
+        videoEl.addEventListener('webkitfullscreenchange', handleFullscreen);
+
+        // ── On mobile tap, enter fullscreen + lock landscape ──
+        videoEl.addEventListener('click', () => {
+            if ('ontouchstart' in window) {
+                if (!document.fullscreenElement && !document.webkitFullscreenElement) {
+                    const requestFS =
+                        videoEl.requestFullscreen ||
+                        videoEl.webkitRequestFullscreen;
+                    if (requestFS) {
+                        requestFS.call(videoEl).then(() => {
+                            if (screen.orientation && screen.orientation.lock) {
+                                screen.orientation.lock('landscape').catch(() => {});
+                            }
+                        }).catch(() => {});
+                    }
+                }
+            }
+        });
+    }
+</script>
+
+</body>
+</html>

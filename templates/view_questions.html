@@ -1,0 +1,29 @@
+{% extends "instructor_sidebar.html" %}
+
+{% block content %}
+
+<h2>Questions - {{ exam.title }}</h2>
+
+<table border="1">
+    <tr>
+        <th>Question</th>
+        <th>Actions</th>
+    </tr>
+
+    {% for q in questions %}
+    <tr>
+        <td>{{ q.question_text }}</td>
+        <td>
+            <a href="{% url 'edit_question' q.id %}">✏ Edit</a>
+            |
+            <a href="{% url 'delete_question' q.id %}">❌ Delete</a>
+        </td>
+    </tr>
+    {% empty %}
+    <tr>
+        <td colspan="2">No questions found</td>
+    </tr>
+    {% endfor %}
+</table>
+
+{% endblock %}

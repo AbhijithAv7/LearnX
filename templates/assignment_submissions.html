@@ -1,0 +1,123 @@
+{% extends "instructor_sidebar.html" %}
+
+{% block link %}
+
+<link rel="stylesheet" href="/static/css/panel.css">
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f6f9;
+}
+
+h2 {
+    text-align: center;
+    margin: 20px 0;
+    color: #333;
+}
+
+/* Container for all submissions */
+.submissions-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 10px;
+}
+
+/* Each submission card */
+.submission-card {
+    background: #fff;
+    padding: 15px 18px;
+    border-radius: 10px;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.08);
+    margin-bottom: 15px;
+    transition: 0.3s;
+}
+
+.submission-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+}
+
+/* Student name */
+.submission-card p:first-child {
+    font-weight: bold;
+    margin-bottom: 8px;
+    color: #222;
+}
+
+/* Submission link */
+.submission-card a {
+    text-decoration: none;
+    color: #007bff;
+    margin-right: 10px;
+    font-weight: 500;
+}
+
+.submission-card a:hover {
+    text-decoration: underline;
+}
+
+/* Score text */
+.submission-card p.score {
+    margin: 6px 0;
+    color: #555;
+}
+
+/* Evaluate button */
+.submission-card button {
+    padding: 8px 16px;
+    background-color: #28a745;
+    border: none;
+    color: #fff;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.submission-card button:hover {
+    background-color: #218838;
+}
+
+/* Back button */
+.back-btn {
+    display: inline-block;
+    margin: 20px auto;
+    padding: 8px 16px;
+    background: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+    text-align: center;
+}
+
+.back-btn:hover {
+    background: #0056b3;
+}
+</style>
+{% endblock %}
+
+{% block content %}
+
+<h2>{{ assignment.title }} - Submissions</h2>
+
+<div class="submissions-container">
+    {% for sub in submissions %}
+    <div class="submission-card">
+        <p>{{ sub.student.username }}</p>
+
+        <a href="{{ sub.submission_link }}" target="_blank">View Submission</a>
+
+        <p class="score">Score: {{ sub.score|default:"Not graded" }}</p>
+
+        <a href="{% url 'evaluate_submission' sub.id %}">
+            <button>Evaluate</button>
+        </a>
+    </div>
+    {% empty %}
+        <p style="text-align:center; color:#777; font-style:italic;">No submissions yet</p>
+    {% endfor %}
+</div>
+
+<a href="javascript:history.back()" class="back-btn">⬅ Back</a>
+
+{% endblock %}

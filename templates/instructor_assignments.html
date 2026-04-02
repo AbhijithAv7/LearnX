@@ -1,0 +1,89 @@
+{% extends "instructor_sidebar.html" %}
+
+{% block link %}
+
+<link rel="stylesheet" href="/static/css/panel.css">
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f6f9;
+}
+
+h2 {
+    text-align: center;
+    margin: 20px 0;
+    color: #333;
+}
+
+/* Container for all assignments */
+.assignments-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 10px;
+}
+
+/* Each assignment card */
+.assignment-card {
+    background: #fff;
+    padding: 15px 18px;
+    border-radius: 10px;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.08);
+    margin-bottom: 15px;
+    transition: 0.3s;
+}
+
+.assignment-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+}
+
+/* Assignment title */
+.assignment-card p:first-child {
+    font-weight: bold;
+    margin-bottom: 8px;
+    color: #222;
+}
+
+/* View Submissions button */
+.assignment-card button {
+    padding: 8px 16px;
+    background-color: #007bff;
+    border: none;
+    color: #fff;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.assignment-card button:hover {
+    background-color: #0056b3;
+}
+
+/* Empty message */
+.assignments-container p.empty {
+    text-align: center;
+    color: #777;
+    font-style: italic;
+}
+</style>
+{% endblock %}
+
+{% block content %}
+
+<h2>All Assignments</h2>
+
+<div class="assignments-container">
+    {% for a in assignments %}
+    <div class="assignment-card">
+        <p>{{ a.title }}</p>
+        <a href="{% url 'view_assignment_submissions' a.id %}">
+            <button>View Submissions</button>
+        </a>
+    </div>
+    {% empty %}
+        <p class="empty">No assignments available</p>
+    {% endfor %}
+</div>
+
+{% endblock %}

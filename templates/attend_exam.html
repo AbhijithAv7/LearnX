@@ -1,0 +1,120 @@
+{% extends "instructor_sidebar.html" %}
+
+{% block link %}
+
+<link rel="stylesheet" href="/static/css/panel.css">
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f6f9;
+    }
+
+    /* Title */
+    h2 {
+        text-align: center;
+        margin: 20px 0;
+        color: #333;
+    }
+
+    /* Form container */
+    form {
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+    /* Question box */
+    .question-box {
+        background: #ffffff;
+        padding: 18px;
+        margin-bottom: 15px;
+        border-radius: 10px;
+        box-shadow: 0 3px 8px rgba(0,0,0,0.08);
+        transition: 0.3s;
+    }
+
+    .question-box:hover {
+        transform: translateY(-2px);
+    }
+
+    /* Question text */
+    .question-box p {
+        margin-bottom: 10px;
+        color: #444;
+    }
+
+    /* Options */
+    label {
+        display: block;
+        padding: 8px 10px;
+        margin-bottom: 6px;
+        background: #f9fafb;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: 0.2s;
+    }
+
+    label:hover {
+        background: #eef2f7;
+    }
+
+    /* Radio button spacing */
+    input[type="radio"] {
+        margin-right: 8px;
+    }
+
+    /* Submit button */
+    button {
+        display: block;
+        margin: 25px auto;
+        padding: 12px 25px;
+        background-color: #28a745;
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    button:hover {
+        background-color: #218838;
+    }
+</style>
+
+{% endblock %}
+
+{% block content %}
+
+<h2>{{ exam.title }}</h2>
+
+<form method="POST">
+    {% csrf_token %}
+
+    {% for q in questions %}
+        <div class="question-box">
+            <p><b>{{ forloop.counter }}. {{ q.question_text }}</b></p>
+
+            <label>
+                <input type="radio" name="question_{{ q.id }}" value="1"> {{ q.option1 }}
+            </label><br>
+
+            <label>
+                <input type="radio" name="question_{{ q.id }}" value="2"> {{ q.option2 }}
+            </label><br>
+
+            <label>
+                <input type="radio" name="question_{{ q.id }}" value="3"> {{ q.option3 }}
+            </label><br>
+
+            <label>
+                <input type="radio" name="question_{{ q.id }}" value="4"> {{ q.option4 }}
+            </label><br><br>
+        </div>
+    {% endfor %}
+        
+    <button type="submit">Submit Exam</button>
+
+</form>
+
+{% endblock %}

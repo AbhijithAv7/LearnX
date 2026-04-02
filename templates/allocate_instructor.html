@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block link %}
+<link rel="stylesheet" href="/static/css/style.css">
+{% endblock %}
+
+{% block code %}
+
+<div class="add_course container">
+
+    <h2>Allocate Instructor</h2>
+
+    <form method="POST">
+        {% csrf_token %}
+
+        <select class="form-control" name="instructor" required>
+            <option value="">Select Instructor</option>
+            {% for ins in instructors %}
+                <option value="{{ ins.id }}">{{ ins.username }}</option>
+            {% endfor %}
+        </select>
+
+        <select class="form-control" name="course" required>
+            <option value="">Select Course</option>
+            {% for course in courses %}
+                <option value="{{ course.id }}">{{ course.title }}</option>
+            {% endfor %}
+        </select>
+
+        <select class="form-control" name="batch" required>
+            <option value="">Select Batch</option>
+            {% for batch in batches %}
+                <option value="{{ batch.id }}">
+                    {{ batch.course.title }} - {{ batch.name }}
+                </option>
+            {% endfor %}
+        </select>
+
+        <button class="btn btn-dark w-100" type="submit">Allocate</button>
+
+    </form>
+
+    <a href="{% url 'Course_Management' %}" class="back-btn">⬅ Back</a>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends "student_sidebar.html" %}
+
+{% block link %}
+<link rel="stylesheet" href="/static/css/panel.css">
+{% endblock %}
+
+{% block content %}
+
+<div class="courses-container">
+    <h1>Available Courses</h1>
+
+    <div class="courses-grid">
+        {% for course in courses %}
+        
+        <a href="{% url 'course_detail' course.id %}" class="course-card">
+            
+            <img src="/Courses/{{ course.image.url }}" alt="course">
+
+            <h3>{{ course.title }}</h3>
+
+        </a>
+
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}
+
+{% comment %} /courses/{{ course.image}} {% endcomment %}

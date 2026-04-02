@@ -1,0 +1,97 @@
+{% extends "instructor_sidebar.html" %} 
+
+{% block link %}
+<link rel="stylesheet" href="/static/css/panel.css" />
+{% endblock %} 
+
+{% block content %}
+
+<h2>Instructor Panel</h2>
+
+<!-- MAIN TABS -->
+<div class="tabs">
+  <a href="?tab=courses" class="{% if tab == 'courses' %}active{% endif %}">Courses</a>
+  <a href="?tab=academics" class="{% if tab == 'academics' %}active{% endif %}">Academics</a>
+</div>
+
+<!-- ================= MAIN CONDITION ================= -->
+{% if tab == 'courses' %}
+
+<h3 style="margin-bottom:15px;">All Courses</h3>
+
+<div style="display:flex; flex-wrap:wrap; gap:15px;">
+
+  {% for c in courses %}
+  <div style="border:1px solid #ddd; border-radius:8px; padding:15px; width:300px;">
+
+      <div style="font-size:16px; font-weight:600; margin-bottom:10px;">
+          {{ c.title }}
+      </div>
+
+      <div>
+          {% if c in my_courses %}
+              <a href="{% url 'course_detail' c.id %}" 
+                 style="padding:6px 12px; background:#226aee; color:#fff; text-decoration:none; border-radius:5px;">
+                 View
+              </a>
+          {% else %}
+              <span style="color:red;">Purchase Required</span>
+          {% endif %}
+      </div>
+
+  </div>
+  {% endfor %}
+
+</div>
+
+<!-- ================= ACADEMICS ================= -->
+{% elif tab == 'academics' %}
+
+<h3>Select Course</h3>
+
+<div class="course-list">
+  {% for c in my_courses %}
+  <a href="?tab=academics&course_id={{ c.id }}"
+     class="{% if course and course.id == c.id %}active{% endif %}">
+    {{ c.title }}
+  </a>
+  {% endfor %}
+</div>
+
+{% if course %}
+
+<!-- SUB TABS -->
+<div class="tabs">
+  <a href="?tab=academics&course_id={{ course.id }}&subtab=lesson"
+     class="{% if subtab == 'lesson' %}active{% endif %}">Lessons</a>
+
+  <a href="?tab=academics&course_id={{ course.id }}&subtab=exam"
+     class="{% if subtab == 'exam' %}active{% endif %}">Exams</a>
+
+  <a href="?tab=academics&course_id={{ course.id }}&subtab=assignment"
+     class="{% if subtab == 'assignment' %}active{% endif %}">Assignments</a>
+
+  <a href="?tab=academics&course_id={{ course.id }}&subtab=material"
+     class="{% if subtab == 'material' %}active{% endif %}">Materials</a>
+</div>
+
+<!-- SUBTAB CONTENT -->
+{% if subtab == 'lesson' %}
+  <a class="add-btn" href="{% url 'add_lesson' course.id %}">+ Add Lesson</a>
+
+{% elif subtab == 'exam' %}
+  <a class="add-btn" href="{% url 'add_exam' course.id %}">+ Add Exam</a>
+
+{% elif subtab == 'assignment' %}
+  <a class="add-btn" href="{% url 'add_assignment' course.id %}">+ Add Assignment</a>
+
+{% elif subtab == 'material' %}
+  <a class="add-btn" href="{% url 'add_material' course.id %}">+ Add Material</a>
+
+{% endif %}
+
+{% endif %}
+
+{% endif %}
+
+{% endblock %}

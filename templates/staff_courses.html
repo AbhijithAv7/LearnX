@@ -1,0 +1,132 @@
+{% extends "staff_sidebar.html" %}
+
+{% block link %}
+
+<link rel="stylesheet" href="/static/css/panel.css">
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f6f9;
+}
+
+/* Page title */
+h2 {
+    text-align: center;
+    margin: 20px 0;
+    color: #333;
+}
+
+/* Courses container */
+.course-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    padding: 10px;
+}
+
+/* Each course card */
+.course-card {
+    background: #fff;
+    width: 280px;
+    padding: 18px;
+    border-radius: 10px;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.08);
+    transition: 0.3s;
+    display: flex;              
+    flex-direction: column;    
+    justify-content: space-between; 
+
+}
+
+.course-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+}
+
+/* Course title */
+.course-card h3 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    color: #222;
+}
+
+/* Description */
+.course-card p {
+    color: #555;
+    font-size: 14px;
+    line-height: 1.4;
+    min-height: 80px;
+}
+
+/* Actions container */
+.course-actions {
+    text-align: center;
+    margin-top: 15px;
+}
+
+/* View button */
+.view-btn {
+    padding: 10px 20px;
+    background-color: #007bff;
+    border: none;
+    color: white;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.view-btn:hover {
+    background-color: #0056b3;
+}
+
+/* Empty message */
+.course-container p {
+    text-align: center;
+    font-style: italic;
+    color: #777;
+}
+
+@media (max-width: 900px) {
+    .course-card {
+        width: 240px;   
+    }
+}
+
+
+@media (max-width: 600px) {
+    .course-card {
+        width: 200px;   
+    }
+}
+
+</style>
+{% endblock %}
+
+{% block content %}
+
+<h2>My Courses</h2>
+
+<div class="course-container">
+
+    {% for course in courses %}
+    <div class="course-card">
+
+        <h3>{{ course.title }}</h3>
+        <p>{{ course.description|truncatewords:15 }}</p>
+
+        <div class="course-actions">
+            <a href="{% url 'course_detail' course.id %}">
+                <button class="view-btn">View Course</button>
+            </a>
+        </div>
+
+    </div>
+    {% empty %}
+        <p>No courses assigned</p>
+    {% endfor %}
+
+</div>
+
+{% endblock %}

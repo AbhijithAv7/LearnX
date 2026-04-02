@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block link %}
+<link rel="stylesheet" href="/static/css/style.css">
+{% endblock %}
+
+{% block code %}
+
+<div class="add_course container">
+
+<h2>Add Course</h2>
+
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+
+<input class="form-control" type="text" name="title" placeholder="Course Title">
+
+<textarea class="form-control" name="description" placeholder="Description"></textarea>
+
+<input class="form-control" type="text" name="duration" placeholder="Duration">
+
+<input class="form-control" type="number" step="0.01" name="price" placeholder="Price">
+
+<input class="form-control" type="file" name="image">
+
+<button class="btn btn-dark w-100" type="submit">Add Course</button>
+</form>
+
+<a href="{% url 'Course_Management' %}" class="back-btn">⬅ Back</a>
+</div>
+
+{% endblock %}

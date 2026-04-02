@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block link %}
+<link rel="stylesheet" href="/static/css/panel.css">
+{% endblock %}
+
+{% block code %}
+<div class="dashboard">
+
+    <div class="sidebar1">
+
+         <a href="{% url 'staff_dashboard' %}">
+            <span class="material-symbols-outlined">dashboard</span>
+            Dashboard
+        </a> 
+
+        <a href="{% url 'profile' %}">
+            <span class="material-symbols-outlined">person</span>
+            Profile
+        </a> 
+
+        <a href="{% url 'staff_courses' %}">
+            <span class="material-symbols-outlined">menu_book</span>
+            Courses
+        </a>
+
+        <a href="{% url 'attendance_log' %}">
+            <span class="material-symbols-outlined">event_available</span>
+            Attendance
+        </a>
+
+        <a href="{% url 'enroll_list' %}">
+            <span class="material-symbols-outlined">how_to_reg</span>
+            Enroll List
+        </a>
+
+    </div>
+
+    
+    <div class="main-content">
+        {% block content %}
+        {% endblock %}
+    </div>
+
+</div>
+{% endblock %}

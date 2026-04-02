@@ -1,0 +1,100 @@
+{% extends "student_sidebar.html" %}
+
+{% block content %}
+
+<style>
+.attendance-container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* Card */
+.attendance-card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 12px;
+    background: #fff;
+}
+
+/* Row layout */
+.attendance-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 6px;
+    flex-wrap: wrap;
+}
+
+.label {
+    font-weight: 600;
+    color: #555;
+}
+
+.value {
+    color: #222;
+}
+
+/* Status */
+.present {
+    color: green;
+    font-weight: 600;
+}
+
+.absent {
+    color: red;
+    font-weight: 600;
+}
+
+/* 📱 Mobile */
+@media (max-width: 600px) {
+    .attendance-card {
+        padding: 10px;
+    }
+
+    .attendance-row {
+        flex-direction: column;
+        gap: 2px;
+    }
+}
+</style>
+
+<h2 style="margin-bottom:15px;">My Attendance</h2>
+
+{% if attendances %}
+
+<div class="attendance-container">
+
+    {% for a in attendances %}
+    <div class="attendance-card">
+
+        <div class="attendance-row">
+            <span class="label">Course:</span>
+            <span class="value">{{ a.lesson.course.title }}</span>
+        </div>
+
+        <div class="attendance-row">
+            <span class="label">Lesson:</span>
+            <span class="value">{{ a.lesson.title }}</span>
+        </div>
+
+        <div class="attendance-row">
+            <span class="label">Status:</span>
+            <span class="{% if a.watched %}present{% else %}absent{% endif %}">
+                {% if a.watched %}
+                    ✅ Present
+                {% else %}
+                    ❌ Absent
+                {% endif %}
+            </span>
+        </div>
+
+    </div>
+    {% endfor %}
+
+</div>
+
+{% else %}
+    <p>No attendance yet.</p>
+{% endif %}
+
+{% endblock %}

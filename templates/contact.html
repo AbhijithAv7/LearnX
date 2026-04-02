@@ -1,0 +1,59 @@
+{% extends "student_sidebar.html" %}
+
+{% block content %}
+<h2>Contact Us</h2>
+<p>You can reach us through any of the following channels:</p>
+
+<style>
+.contact-links {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.contact-link {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 20px;
+    border: 1px solid black;
+    border-radius: 8px;
+    font-weight: bold;
+    text-decoration: none;
+    color: black;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+/* Hover effect */
+.contact-link:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+
+.contact-link .material-symbols-outlined {
+    font-size: 24px;
+}
+</style>
+
+<div class="contact-links">
+
+    <a href="https://wa.me/1234567890" target="_blank" class="contact-link whatsapp">
+        <span class="material-symbols-outlined">chat</span> WhatsApp
+    </a>
+
+    <a href="mailto:support@example.com" class="contact-link email">
+        <span class="material-symbols-outlined">email</span> Email
+    </a>
+
+    <a href="https://www.instagram.com/yourusername" target="_blank" class="contact-link instagram">
+        <span class="material-symbols-outlined">camera_alt</span> Instagram
+    </a>
+
+    <a href="https://www.facebook.com/yourusername" target="_blank" class="contact-link facebook">
+        <span class="material-symbols-outlined">facebook</span> Facebook
+    </a>
+
+</div>
+{% endblock %}

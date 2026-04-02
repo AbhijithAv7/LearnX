@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Study Materials</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f6f9;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: 50px auto;
+            background: #ffffff;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .material-item {
+            padding: 12px;
+            margin-bottom: 12px;
+            background: #f9fafb;
+            border-radius: 6px;
+            transition: 0.3s;
+        }
+
+        .material-item:hover {
+            background: #eef2f7;
+        }
+
+        .material-title {
+            font-size: 16px;
+            color: #444;
+            margin-bottom: 6px;
+        }
+
+        .download-link {
+            text-decoration: none;
+            color: #28a745;
+            font-weight: 500;
+        }
+
+        .download-link:hover {
+            color: #1e7e34;
+        }
+
+        hr {
+            border: none;
+            height: 1px;
+            background: #ddd;
+            margin: 10px 0;
+        }
+
+        .empty {
+            text-align: center;
+            color: #888;
+            font-style: italic;
+        }
+
+        .back-btn {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 16px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            transition: 0.3s;
+        }
+
+        .back-btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <h2>Study Materials - {{ course.title }}</h2>
+
+    {% for material in materials %}
+        <div class="material-item">
+            <p class="material-title">{{ material.title }}</p>
+
+            <a class="download-link" href="{{ material.file.url }}" target="_blank">
+                📥 View / Download
+            </a>
+        </div>
+    {% empty %}
+        <p class="empty">No materials available</p>
+    {% endfor %}
+
+    <!-- Back Button -->
+    <a href="javascript:history.back()" class="back-btn">⬅ Back</a>
+
+</div>
+
+</body>
+</html>

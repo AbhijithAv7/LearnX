@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block code %}
+
+<h2>Update Instructor Allocation</h2>
+
+<form method="POST">
+    {% csrf_token %}
+
+    <label>Instructor:</label>
+    <select name="instructor">
+        {% for i in instructors %}
+        <option value="{{ i.id }}" {% if i.id == alloc.instructor.id %}selected{% endif %}>
+            {{ i.username }}
+        </option>
+        {% endfor %}
+    </select>
+
+    <label>Course:</label>
+    <select name="course">
+        {% for c in courses %}
+        <option value="{{ c.id }}" {% if c.id == alloc.course.id %}selected{% endif %}>
+            {{ c.title }}
+        </option>
+        {% endfor %}
+    </select>
+
+    <label>Batch:</label>
+    <select name="batch">
+        {% for b in batches %}
+        <option value="{{ b.id }}" {% if b.id == alloc.batch.id %}selected{% endif %}>
+            {{ b.name }}
+        </option>
+        {% endfor %}
+    </select>
+
+    <button type="submit">Update</button>
+</form>
+
+{% endblock %}

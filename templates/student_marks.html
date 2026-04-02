@@ -1,0 +1,28 @@
+{% extends "student_sidebar.html" %}
+
+{% block content %}
+
+<h2>My Assignment Marks</h2>
+
+{% if submissions %}
+    {% for sub in submissions %}
+        <div>
+            <p><b>{{ sub.assignment.title }}</b></p>
+
+            <p>
+                Score: 
+                {{ sub.score|default:"Not graded yet" }}
+            </p>
+
+            <p>
+                Feedback: 
+                {{ sub.feedback|default:"No feedback yet" }}
+            </p>
+        </div>
+        <hr>
+    {% endfor %}
+{% else %}
+    <p>No submissions yet.</p>
+{% endif %}
+
+{% endblock %}

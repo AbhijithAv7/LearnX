@@ -1,0 +1,39 @@
+{% extends "instructor_sidebar.html" %}
+
+{% block link %}
+
+<link rel="stylesheet" href="/static/css/panel.css">
+
+{% endblock %}
+
+{% block content %}
+
+    <a href="{% url 'instructor_courses' %}?tab=academics&course_id={{ course.id }}" class="back-btn">
+        ⬅ Back
+    </a>
+
+<div class="add_course container">
+
+    <h2>Add Assignment</h2>
+
+    <form method="POST">
+        {% csrf_token %}
+
+        <input class="form-control" type="text" name="title" placeholder="Title" required>
+
+        <textarea class="form-control" name="description" placeholder="Description" required></textarea>
+
+        <input class="form-control" type="url" name="material_link" placeholder="Material Link">
+
+        <input class="form-control" type="date" name="due_date" min="{{ today }}" required>
+
+        <button class="btn btn-dark w-100" type="submit">
+            Add Assignment
+        </button>
+    </form>
+
+
+
+</div>
+
+{% endblock %}

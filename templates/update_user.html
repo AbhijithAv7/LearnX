@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block link %}
+
+{% endblock %}
+
+{% block content %}
+
+<div class="container">
+    <h2>Update User</h2>
+
+    <form method="POST">
+        {% csrf_token %}
+
+        <label>Username:</label>
+        <input type="text" name="username" value="{{ user.username }}">
+
+        <label>Email:</label>
+        <input type="email" name="email" value="{{ user.email }}">
+
+        <label>Phone:</label>
+        <input type="number" name="Phone" value="{{ user.phone }}">
+
+        <button type="submit" class="btn edit-btn">Update</button>
+    </form>
+</div>
+
+{% endblock %}
